@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Edit Room</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Room</h1>
+        
+        <form action="/edit_room/{{ room[0] }}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ room[1] }}" required><br>
+            
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" value="{{ room[2] }}" required><br>
+            
+            <input type="submit" value="Save">
+        </form>
+    </div>  
+</body>
+</html>

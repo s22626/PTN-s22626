@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='owner_dashboard.css') }}">
+    <title>Owner Dashboard</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Owner Dashboard</h1>
+        
+        <h2>All Rooms</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                    <tr>
+                        <td>{{ room[2] }}</td>
+                        <td>{{ room[1] }}</td>
+                        <td>
+                            <a href="/edit_room/{{ room[0] }}">Modify</a>
+                        </td>
+                        <td>
+                            <form action="/delete_room/{{ room[0] }}" method="post" onsubmit="return confirm('Are you sure you want to delete this room?');">
+                                <input type="submit" value="Remove Room">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="/add_room">Add New Room</a>
+        <br>
+    </div>
+    <div class="dashboard-container">
+    <h2>All Reservations per Room</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation[1] }}</td>
+                        <td>{{ reservation[2] }}</td>
+                        <td>{{ reservation[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

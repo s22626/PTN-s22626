@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Add Room</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Room</h1>
+
+        <form action="/add_room" method="post" enctype="multipart/form-data">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+            <br>
+            <label for="photo">Room Photo:</label>
+            <input type="file" id="photo" name="photo">
+            <br>
+            <input type="submit" value="Add Room">
+        </form>
+    </div>
+</body>
+</html>

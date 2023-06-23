@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_dashboard.css') }}">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>User Dashboard</h1>
+
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+
+        <h2>My Reservations</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation[1] }}</td>
+                        <td>{{ reservation[2] }}</td>
+                        <td>{{ reservation[3] }}</td>
+                        <td>
+                            <form action="/cancel_reservation/{{ reservation[0] }}" method="post">
+                                <input type="submit" value="Cancel Reservation">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="dashboard-container">
+        <h2>All Rooms</h2>
+        {% for room in rooms %}
+            <div class="room">
+                <div class="room-photo">
+                    {% if room[3] %}
+                        <img src="{{ url_for('static', filename='uploads/' + room[3]) }}" alt="Room Photo">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='placeholder.png') }}" alt="Room Photo">
+                    {% endif %}
+                </div>
+                <div class="room-details">
+                    <h3>{{ room[1] }}</h3>
+                    <p>{{ room[2] }}</p>
+                        <form action="/book_room/{{ room[0] }}" method="post">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date" required><br>
+
+                            <label for="end_date">End Date:</label>
+                            <input type="date" id="end_date" name="end_date" required><br>
+
+                            <input type="submit" value="Book">
+                        </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
